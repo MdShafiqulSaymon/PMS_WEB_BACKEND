@@ -1,0 +1,82 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+model Events {
+  id          String      @id @unique @default(uuid())
+  created_at  DateTime    @default(now())
+  updated_at  DateTime    @updatedAt
+  start_date DateTime
+  end_date DateTime
+  title String
+  details String
+  status STATUS_TYPE
+  img_rrl String
+  @@map("events")
+}
+model Offers {
+  id          String      @id @unique @default(uuid())
+  created_at  DateTime    @default(now())
+  updated_at  DateTime    @updatedAt
+  title String
+  details String
+  img_rrl String
+  @@map("offers")
+}
+model About_US {
+  id          String      @id @unique @default(uuid())
+  created_at  DateTime    @default(now())
+  updated_at  DateTime    @updatedAt
+  details String
+  @@map("about_us")
+}
+model Templates {
+  id          String      @id @unique @default(uuid())
+  created_at  DateTime    @default(now())
+  updated_at  DateTime    @updatedAt
+  chosen_template String
+  @@map("templates")
+}
+model Contact {
+  id          String      @id @unique @default(uuid())
+  created_at  DateTime    @default(now())
+  updated_at  DateTime    @updatedAt
+  phone String
+  email String
+  location String
+  logo_url String
+  @@map("contact")
+}
+model Social_Media {
+  id          String      @id @unique @default(uuid())
+  created_at  DateTime    @default(now())
+  updated_at  DateTime    @updatedAt
+  facebook String
+  instagram String
+  youtube String
+  @@map("social_media")
+}
+model Main_Slider {
+  id          String      @id @unique @default(uuid())
+  created_at  DateTime    @default(now())
+  updated_at  DateTime    @updatedAt
+  title String
+  sub_title String
+  img_url String
+  @@map("main_slider")
+}
+enum STATUS_TYPE {
+  SAVE
+  DRAFT
+  DISCARD
+}
